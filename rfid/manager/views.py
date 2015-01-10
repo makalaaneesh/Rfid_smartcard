@@ -22,6 +22,10 @@ def detail(request, rollnumber):
 
 def entered(request):
 	roll=request.POST['rollno']
-	student= get_object_or_404(StudentData, roll_number=roll)
+	# student= get_object_or_404(StudentData, roll_number=roll)
 	return HttpResponseRedirect(reverse('detail', args=(roll,)))
 
+def allstudents(request):
+	students=StudentData.objects.all()
+	context={'students':students}
+	return render(request, 'manager/allstudents.html', context)
