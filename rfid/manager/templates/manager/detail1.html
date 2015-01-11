@@ -22,7 +22,7 @@
     <link href="{%  static 'manager/morris.css' %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{%  static 'manager/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <!-- <link href="{% static 'manager/font-awesome.min.css' %}" rel="stylesheet" type="text/css"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +33,8 @@
 
 </head>
 
-<body>
+<body >
+
   <nav class="navbar navbar-default" id="black">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,13 +48,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Your Profile</a>
+      <a class="navbar-brand" href="{% url 'index' %}">Lakshya Foundation</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li><a href="{% url 'enter' %}" style="font-size:25px; padding-top:20px"><strong><-Back</strong></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -65,8 +66,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            NITW Mess Attendance<br> <small>Statistics Overview</small>
+                            NITW Mess Attendance<br> <small> Student Statistics </small>
                         </h1>
+                        {% if not attendance %}
+                            <h2 style="color: red;"><center>Student has not registered<br></center></h2>
+                        {% endif %}
                        
                     </div>
                 </div>
@@ -76,7 +80,13 @@
                     <img src="{% static 'manager/images/User-Default.jpg'%}" id="image" >
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <p>hello</p>
+                    <!-- <p>hello</p> -->
+                {% for a in comb%}
+                
+                 <p style="font-size:18px; text-transform: uppercase;"><span style = "font-size: 20px; font-style:strong; text-transform:uppercase;"><strong>{{a.0}}</strong></span>: {{ a.1 }}</p>
+            
+                <br>
+                {% endfor %}
                 </div>
           
                 
@@ -86,38 +96,104 @@
                 </div>
   <br><br><br>
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-2" styles = "max-height:40px;">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
-                                        <div>Days Attended</div>
+                                    <div class="col-xs-10 text-center">
+                                        <div class="huge" style="align:center; padding-right:70px">{{ attendance }}</div>
+                                        <div style="padding-right:80px;">DAYS ATTENDED</div>
                                     </div>
                                 </div>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-2">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-10 text-left">
+                                        <div class="huge" style="font-size:27px;">{{ lmeal }}</div>
+                                        <div >LAST MEAL AT</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-10 text-center">
+                                        <div class="huge" style="align:center; padding-right:70px;">{{ streak }}</div>
+                                        <div style="padding-right:70px;">ATTENDANCE STREAK</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
-                                    <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>Mess dues</div>
+                                    <div class="col-xs-10 text-center">
+                                        <div class="huge" style ="padding-right:70px;">Rs.{{ dues }}</div>
+                                        <div style="padding-right:70px;">MESS DUES</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-2">
+                        <div class="panel panel-black" style="background-color:rgba(0,0,0,0.8);">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-10 text-center">
+                                        <div class="huge" style="align:center; padding-right:70px;">{{ guest }}</div>
+                                        <div style="padding-right:70px;">GUESTS ACCOMPANIED</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="panel panel-purple">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-10 text-center">
+                                        <div class="huge" style="align:center; padding-right:80px;">Rs.{{ totdues }}</div>
+                                        <div style="padding-right:40px;"><br>TOTAL DUES</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
+
                 <!-- /.row -->
 
               

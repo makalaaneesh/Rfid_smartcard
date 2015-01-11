@@ -9,6 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script type="text/javascript">
+    <!--
+    function goToPage(page){
+ $(document).ready(function(){
+  $('body').fadeOut(1000, function(){
+   window.location=page;
+  });
+ });
+}
+//-->
+</script>
 
     <title>NIT Warangal Mess Attendance</title>
 
@@ -24,7 +35,7 @@
 
 </head>
 
-<body>
+<body style="background-color:#DCDCDC;">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +82,7 @@
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a href={% url 'enter' %} class="btn btn-default btn-lg"> <span class="network-name">Check Now</span></a>
+                                <a href="javascript:goToPage('{% url 'enter' %}')" class="btn btn-default btn-lg"> <span class="network-name">Check Now</span></a>
                             </li>
                             
                         </ul>

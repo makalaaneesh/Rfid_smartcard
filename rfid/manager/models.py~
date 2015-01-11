@@ -172,13 +172,10 @@ class Mess(models.Model):
     attendance = models.IntegerField()
     date = models.DateField()
     streak = models.IntegerField()
-    hours = models.IntegerField()
-    guest = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'mess'
-
 
 
 class MessMain(models.Model):
