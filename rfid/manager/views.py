@@ -5,9 +5,13 @@ from manager.models import StudentData
 
 
 def index(request):
+	context={}
+	return render(request, 'manager/index1.html', context)
+
+def enter(request):
 	students=StudentData.objects.all()
 	context={'students':students}
-	return render(request, 'manager/index.html', context)
+	return render(request, 'manager/enter.html', context)
 
 def detail(request, rollnumber):
 	student= get_object_or_404(StudentData, roll_number=rollnumber)
@@ -18,7 +22,7 @@ def detail(request, rollnumber):
 		values.append(getattr(student, col))
 	comb= zip(cols, values)
 	context={'student':student, 'cols':cols,'values':values, 'comb':comb }
-	return render(request, 'manager/detail.html', context)
+	return render(request, 'manager/detail1.html', context)
 
 def entered(request):
 	roll=request.POST['rollno']
